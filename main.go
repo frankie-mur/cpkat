@@ -1,39 +1,18 @@
 package main
 
 import (
+	"context"
+	_ "embed"
+
 	"github.com/frankie-mur/cpkat/cmd"
+	"github.com/frankie-mur/cpkat/data"
+	_ "github.com/mattn/go-sqlite3"
 )
 
-// func run() error {
-
-// 	// queries := links.New(db)
-
-// 	// newLink, err := queries.CreateLink(ctx, links.CreateLinkParams{
-// 	// 	Name: "test",
-// 	// 	Link: "https://google.com",
-// 	// })
-// 	// if err != nil {
-// 	// 	return err
-// 	// }
-// 	// fmt.Printf("New link: %+v\n", newLink)
-
-// 	// link, err := queries.GetLink(ctx, newLink.ID)
-// 	// if err != nil {
-// 	// 	return err
-// 	// }
-
-// 	// fmt.Printf("Fetched link: %+v\n", link)
-
-// 	// allLinks, err := queries.ListLinks(ctx)
-// 	// if err != nil {
-// 	// 	return err
-// 	// }
-
-// 	// fmt.Printf("List of links: %v\n", allLinks)
-
-// 	// return nil
-// }
-
 func main() {
+	err := data.OpenDB(context.Background())
+	if err != nil {
+		panic(err)
+	}
 	cmd.Execute()
 }
